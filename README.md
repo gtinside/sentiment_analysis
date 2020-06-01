@@ -4,12 +4,12 @@ The purpose of this application is to analyze the sentiments for top to 20 S&P 5
 #### Requirements
 <hr/>
 
-1. Docker
-2. Tested on Mac OSX, Ubuntu 14.X, CentOS 6.X
-3. [AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-4. Python 3.8
-5. nltk punkt and stopwords packages (https://www.nltk.org/)
+1. Docker 
+2. [AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+3. Python 3.8
+4. nltk punkt and stopwords packages (https://www.nltk.org/)
 5. pip python package manager
+6. Tested on Mac OSX, Ubuntu 14.X, CentOS 6.X 
 
 #### Getting Started
 <hr/>
