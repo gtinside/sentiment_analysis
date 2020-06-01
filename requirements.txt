@@ -1,0 +1,7 @@
+tweepy
+nltk
+vaderSentiment
+redis
+boto3
+schedule
+flask

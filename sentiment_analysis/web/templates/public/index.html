@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Top 20 S&P 500 stocks</title>
+</head>
+<body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<div id="chart_div" style="width: 100%; height: 900px;"></div>
+<script>
+    google.charts.load('current', {'packages': ['treemap']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        let heat_map = [["'Location'", "'Parent'", "'Market trade volume (size)'", "'Market increase/decrease (color)'"], ["S&P500",
+            null, 0, 0]]
+        let options = {
+            minColor: '#f00',
+            midColor: '#ddd',
+            maxColor: '#0d0',
+            fontColor: 'black',
+            showScale: true,
+            generateTooltip: showFullTooltip
+        };
+        let total_tweets_per_category = JSON.parse('{{total_tweets_per_category|safe}}')
+        let heat_map_parsed = JSON.parse('{{analyzed_map|safe}}')
+        console.log(heat_map_parsed)
+        heat_map_parsed.forEach(e => heat_map.push(e))
+        let data = google.visualization.arrayToDataTable(heat_map);
+        let tree = new google.visualization.TreeMap(document.getElementById('chart_div'));
+        tree.draw(data, options);
+
+        function showFullTooltip(row, size, value) {
+            if(row != 0) {
+                const total = total_tweets_per_category[data.getValue(row, 0)]['total_tweets']
+                const positive = total_tweets_per_category[data.getValue(row, 0)]['total_positive']
+                const negative = total_tweets_per_category[data.getValue(row, 0)]['total_negative']
+                return '<div style="background:#fd9; padding:10px; border-style:solid; font-family: Verdana;font-size: 14px">' +
+                    '<span><b>' + data.getValue(row, 0) +
+                    '</b> in ' + data.getValue(row, 1) + '</span><br>' +
+                    'Overall tweets Analyzed: ' + {{overall_tweets}} + '<br>' +
+                     'Total '+ data.getValue(row, 0) +' tweets analyzed: ' + total + '<br>' +
+                    'Tweets with positive sentiment: ' + positive + '<br>' +
+                    'Tweets with negative sentiments: ' + negative + '<br>' +
+                    'Delta' + ': ' + data.getValue(row, 3) + ' </div>';
+                }
+        }
+    }
+</script>
+</body>
+</html>
