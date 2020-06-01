@@ -1,5 +1,6 @@
 ### Sentiment Analysis on top 20 S&P 500 stocks
-The purpose of this application is to analyze tweets related to top 20 S&P 500 stocks. 
+The purpose of this application is to analyze the sentiments for top to 20 S&P 500 stocks (based on market cap). Streaming Twitter APIs are used to capture the corpus for running the sentiment analysis
+
 #### Requirements
 <hr/>
 
@@ -12,6 +13,7 @@ The purpose of this application is to analyze tweets related to top 20 S&P 500 s
 
 #### Getting Started
 <hr/>
+
 Before getting started update the *sentiment_analysis/setup/keys.cfg* file with the following:
 
 1. Twitter Consumer Key & Consumer Key Secret
@@ -44,3 +46,4 @@ docker build -t sentiment_analysis_web -f build/web/Dockerfile .
 docker run --network sentimental_network -e LocalDevelopment=1 -e LocalStackContainer=localstack -e RedisContainer=redis sentiment_analysis_server:latest
 docker run --network sentimental_network -p 5001:5001  -e LocalDevelopment=1 -e LocalStackContainer=localstack -e RedisContainer=redis sentiment_analysis_web:latest
 ```
+After the steps mentioned above navigate to http://localhost:5001 to analyze the heat map
