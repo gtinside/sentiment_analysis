@@ -75,7 +75,7 @@ def _read_keys_from_redis():
             else:
                 total_tweets += tweet_count
         except Exception as e:
-            logging.exception("Error reading key {} from redis because of {}:".format(key, e), exc_info=True)
+            logging.exception("Error reading key: {} from redis because of {}:".format(key, e), exc_info=True)
     return stock_sentiment_dict, total_positive, total_negative, total_tweets
 
 
