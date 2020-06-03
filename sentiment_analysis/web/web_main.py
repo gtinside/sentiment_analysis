@@ -57,7 +57,7 @@ def _read_keys_from_redis():
     total_tweets = 0
     for key in redis_conn.scan_iter("*"):
         try:
-            logging.info("Getting count for {}".format(key.decode("utf-8")))
+            logging.info("Getting count for category {}".format(key.decode("utf-8")))
             keys = key.decode("utf-8").split(":")
             # Split based on ':',
             # index = 0 will have name
