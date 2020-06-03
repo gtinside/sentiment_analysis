@@ -2,9 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    paths-ignore:
+    - 'sentiment_analysis/web/**'
 
 jobs:
 
@@ -63,7 +62,7 @@ jobs:
         
     - name: Update ECS Service Definition to force deployment
       run: |
-         aws ecs update-service --cluster GoApplicationECSCluster --service GoChatService --force-new-deployment
+         aws ecs update-service --cluster GoApplicationECSCluster --service SentimentServerSvc --force-new-deployment
       env: 
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
