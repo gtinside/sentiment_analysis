@@ -1,5 +1,5 @@
 ### Sentiment Analysis on top 20 S&P 500 stocks
-![Server component build & deploy](https://github.com/gtinside/sentiment_analysis/workflows/Server%20component%20build%20&%20deploy/badge.svg?branch=master) 
+![Server component build & deploy](https://github.com/gtinside/sentiment_analysis/workflows/Server%20component%20build%20&%20deploy/badge.svg?branch=master) ![Web component build & deploy](https://github.com/gtinside/sentiment_analysis/workflows/Web%20component%20build%20&%20deploy/badge.svg?branch=master)
 
 The purpose of this application is to analyze the sentiments for top to 20 S&P 500 stocks (based on market cap). Streaming Twitter APIs are used to capture the corpus for running the sentiment analysis
 
