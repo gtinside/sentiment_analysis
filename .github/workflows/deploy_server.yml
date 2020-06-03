@@ -51,7 +51,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: gtinside/sentiment-analysis-server
-        dockerfile: ../../build/server/Dockerfile
+        dockerfile: build/server/Dockerfile
         tags: latest
     
     - name: Configure AWS credentials
