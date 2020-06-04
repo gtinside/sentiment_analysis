@@ -3,6 +3,11 @@
 
 The purpose of this application is to analyze the sentiments for top to 20 S&P 500 stocks (based on market cap). Streaming Twitter APIs are used to capture the corpus for running the sentiment analysis
 
+#### Architecture
+<hr/>
+
+A python server is responsible for streaming the tweets based on ticker from Twitter. Tweets are cleansed and queued in SQS. From SQS the tweets are read by a a separate process that score them using [vaderSentiment](https://pypi.org/project/vaderSentiment/)
+
 #### Requirements
 <hr/>
 
@@ -49,3 +54,21 @@ docker run --network sentimental_network -e LocalDevelopment=1 -e LocalStackCont
 docker run --network sentimental_network -p 5001:5001  -e LocalDevelopment=1 -e LocalStackContainer=localstack -e RedisContainer=redis sentiment_analysis_web:latest
 ```
 After the steps mentioned above navigate to http://localhost:5001 to analyze the heat map
+
+#### Packaging & Deployment
+<hr/>
+
+Refer to the [Workflow](https://github.com/gtinside/sentiment_analysis/tree/master/.github/workflows) for build and deployment details. 
+Following workflows are embedded in it:
+1. Image build and publish to Github package registry
+2. Image build and publish to [Docker public registry](https://hub.docker.com/repository/docker/gtinside/)
+3. Refresh of AWS ECS Service. I have hardcoded the ECS Cluster and Deployment Service name for now.
+
+#### Output
+<hr/>
+
+The output of this analysis is a Tree Map representing the trend based on sentiments in the received tweets
+
+![Tree Map](/docs/images/sentimentanalysis.png)
+
+![Analysis](/docs/images/details.png)
