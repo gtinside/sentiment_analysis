@@ -1,6 +1,7 @@
 from sentiment_analysis.datasource.twitter_fetch import TwitterStreamProcessor
 from sentiment_analysis.common.environment.set_env import get_sqs_conn, get_twitter_keys, get_redis_conn
 from multiprocessing import Pool
+import os
 import logging
 from logging.config import fileConfig
 fileConfig('../common/logging/logging_config.ini')
@@ -28,6 +29,7 @@ env = Environment()
 
 
 def init_process(event_type):
+    logging.info("Received the event type {}".format(event_type))
     if event_type == "stream":
         logging.info("Initializing stream")
         env.get_stream_processor().init_streaming()
@@ -37,4 +39,9 @@ def init_process(event_type):
 
 
 if __name__ == '__main__':
-    Pool().map(init_process, ["stream", "processor"])
+    logging.info("CPU Count : {}".format(os.cpu_count()))
+    try:
+        with Pool(2) as p:
+            p.map(init_process, ["stream", "processor"])
+    except Exception as e:
+        logging.exception("Error initiating the processes {}".format(e), exc_info=True)
