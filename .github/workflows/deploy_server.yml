@@ -16,6 +16,11 @@ jobs:
       run: echo '::set-env name=IMAGE_NAME::sentiment_analysis_server'
     
     - uses: actions/checkout@v2
+      
+    - name: Test with pytest
+      run: |
+        pytest
+          
     - name: Build the Docker image
       run: docker build . --file build/server/Dockerfile --tag $IMAGE_NAME:latest
     
