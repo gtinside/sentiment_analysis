@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tweepy
+import os
 from sentiment_analysis.datasource.twitter_fetch import TwitterStreamProcessor, TweetStreamListener
 
 
@@ -10,7 +11,7 @@ class TwitterOperationTestCases(unittest.TestCase):
                                                twitter_key=None,
                                                twitter_key_secret=None,
                                                redis_conn=None,
-                                               symbols_list="metadata/test_symbols.log",
+                                               symbols_list=os.path.dirname(__file__)+"/metadata/test_symbols.log",
                                                sqs_client=None, sqs_queue_url=None, run_forever=False)
     _twitter_stream = TweetStreamListener("FakeTag", None)
 

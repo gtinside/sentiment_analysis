@@ -1,6 +1,7 @@
 import logging
 from logging.config import fileConfig
-fileConfig('../common/logging/logging_config.ini')
+import os
+fileConfig(os.path.dirname(__file__) + '/../common/logging/logging_config.ini')
 
 logger = logging.getLogger(__name__)
 

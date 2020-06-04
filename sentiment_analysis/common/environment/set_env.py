@@ -4,8 +4,7 @@ import json
 import redis
 import logging
 from logging.config import fileConfig
-
-fileConfig('../common/logging/logging_config.ini')
+fileConfig(os.path.dirname(__file__) + '/../logging/logging_config.ini')
 
 logger = logging.getLogger(__name__)
 

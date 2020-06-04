@@ -6,7 +6,8 @@ from sentiment_analysis.persistence.persist_analysis import AnalysisPersistence
 from sentiment_analysis.processor.process_data import TweetPostProcessor
 from sentiment_analysis.tweet_queue.queue_processor import QueueProcessor
 from logging.config import fileConfig
-fileConfig('../common/logging/logging_config.ini')
+import os
+fileConfig(os.path.dirname(__file__) + '/../common/logging/logging_config.ini')
 
 logger = logging.getLogger(__name__)
 
