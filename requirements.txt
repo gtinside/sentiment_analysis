@@ -5,3 +5,4 @@ redis
 boto3
 schedule
 flask
+pytest
