@@ -67,7 +67,7 @@ Following workflows are embedded in it:
 #### Output
 <hr/>
 
-The output of this analysis is a Tree Map representing the trend based on sentiments in the received tweets
+The output of this analysis is a Tree Map representing the trend based on sentiments on the received tweets
 
 ![Tree Map](/docs/images/sentimentanalysis.png)
 
