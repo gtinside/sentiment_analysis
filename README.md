@@ -72,3 +72,12 @@ The output of this analysis is a Tree Map representing the trend based on sentim
 ![Tree Map](/docs/images/sentimentanalysis.png)
 
 ![Analysis](/docs/images/details.png)
+
+#### Calculations
+<hr/>
+
+```
+Size of the rectangle in TreeMap for stock A = (Number of tweets with positive sentiment for stock A + Number of tweets with negative sentiment for stock A)/Total tweets received for all stocks in the bucket
+
+Overall Sentiment for stock A = (Number of tweets with positive sentiment for stock A/Total number of positive tweets across all stocks) - (Number of tweets with negative sentiment for stock A/Total number of negative tweets across all stocks)
+```
