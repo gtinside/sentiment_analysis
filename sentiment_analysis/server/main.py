@@ -1,10 +1,11 @@
 from sentiment_analysis.datasource.twitter_fetch import TwitterStreamProcessor
 from sentiment_analysis.common.environment.set_env import get_sqs_conn, get_twitter_keys, get_redis_conn
 from multiprocessing import Pool
+from sentiment_analysis.common.logger.log_util import logging_config
 import os
 import logging
-from logging.config import fileConfig
-fileConfig(os.path.dirname(__file__) + '/../common/logging/logging_config.ini')
+from logging.config import dictConfig
+dictConfig(logging_config)
 
 logger = logging.getLogger(__name__)
 

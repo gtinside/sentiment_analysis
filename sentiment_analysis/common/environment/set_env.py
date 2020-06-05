@@ -2,9 +2,10 @@ import os
 import boto3
 import json
 import redis
+from sentiment_analysis.common.logger.log_util import logging_config
 import logging
-from logging.config import fileConfig
-fileConfig(os.path.dirname(__file__) + '/../logging/logging_config.ini')
+from logging.config import dictConfig
+dictConfig(logging_config)
 
 logger = logging.getLogger(__name__)
 

@@ -3,10 +3,10 @@ import re
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from string import punctuation
+from sentiment_analysis.common.logger.log_util import logging_config
 import logging
-from logging.config import fileConfig
-import os
-fileConfig(os.path.dirname(__file__) + '/../common/logging/logging_config.ini')
+from logging.config import dictConfig
+dictConfig(logging_config)
 
 logger = logging.getLogger(__name__)
 
