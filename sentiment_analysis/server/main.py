@@ -40,8 +40,14 @@ def init_process(event_type):
 
 if __name__ == '__main__':
     logging.info("CPU Count : {}".format(os.cpu_count()))
+    process_type = os.environ.get('ProcessType')
     try:
-        with Pool(2) as p:
-            p.map(init_process, ["stream", "processor"])
+        if process_type is None:
+            with Pool(2) as p:
+                p.map(init_process, ["stream", "processor"])
+        elif process_type == 'stream':
+            init_process("stream")
+        else:
+            init_process("processor")
     except Exception as e:
         logging.exception("Error initiating the processes {}".format(e), exc_info=True)
