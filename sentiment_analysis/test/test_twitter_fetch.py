@@ -12,7 +12,8 @@ class TwitterOperationTestCases(unittest.TestCase):
                                                twitter_key_secret=None,
                                                redis_conn=None,
                                                symbols_list=os.path.dirname(__file__)+"/metadata/test_symbols.log",
-                                               sqs_client=None, sqs_queue_url=None, run_forever=False)
+                                               sqs_client=None, sqs_queue_url=None, run_forever=False,
+                                               use_stop_words=False, use_tokenizer=False)
     _twitter_stream = TweetStreamListener("FakeTag", None)
 
     def test_get_tags(self):
@@ -33,7 +34,7 @@ class TwitterOperationTestCases(unittest.TestCase):
         self._stream_processor._persist = fake_redis
 
         fake_msg_attr = {'name': {'StringValue': 'FakeName'}, 'symbol': {'StringValue': 'FakeSymbol'}}
-        fake_sqs_msg = {'Body': 'PYTHON IS GREAT!!!', 'MessageAttributes': fake_msg_attr}
+        fake_sqs_msg = {'Body': 'PYTHON IS EXTREMELY GREAT', 'MessageAttributes': fake_msg_attr}
         fake_sqs.read_message.return_value = fake_sqs_msg
         self._stream_processor.analyze_tweets()
         assert fake_redis.increment_counter.called
@@ -46,7 +47,7 @@ class TwitterOperationTestCases(unittest.TestCase):
         self._stream_processor._queue_processor = fake_sqs
         self._stream_processor._persist = fake_redis
         fake_msg_attr = {'name': {'StringValue': 'FakeName'}, 'symbol': {'StringValue': 'FakeSymbol'}}
-        fake_sqs_msg = {'Body': 'CD_EF_GH_IJ product is terrible', 'MessageAttributes': fake_msg_attr}
+        fake_sqs_msg = {'Body': 'Today SUX!', 'MessageAttributes': fake_msg_attr}
         fake_sqs.read_message.return_value = fake_sqs_msg
         self._stream_processor.analyze_tweets()
         assert fake_redis.increment_counter.called

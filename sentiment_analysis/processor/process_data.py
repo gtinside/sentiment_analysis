@@ -12,9 +12,10 @@ logger = logging.getLogger(__name__)
 
 
 class TweetPostProcessor:
-    def __init__(self):
-        self._stopwords = stopwords.words('english') + list(punctuation) + ['AT_USER', 'URL']
+    def __init__(self, use_stop_words=True, use_tokenizer=True):
+        self._stopwords = stopwords.words('english') if use_stop_words else [] + list(punctuation) + ['AT_USER', 'URL']
         self._sentiment_analyzer = SentimentIntensityAnalyzer()
+        self._use_tokenizer = use_tokenizer
 
     def process_tweets(self, tweet):
         """
@@ -33,8 +34,8 @@ class TweetPostProcessor:
             tweet = re.sub('((www\.[^\s]+)|(https?://[^\s]+))', 'URL', tweet)
             tweet = re.sub('@[^\s]+', 'AT_USER', tweet)
             tweet = re.sub(r'#([^\s]+)', r'\1', tweet)
-            tweet = word_tokenize(tweet)
-            return self.analyze_data(' '.join([word for word in tweet if word not in self._stopwords]))
+            tweet = word_tokenize(tweet) if self._use_tokenizer else tweet
+            return self.analyze_data(''.join([word for word in tweet if word not in self._stopwords]))
         except Exception as e:
             logging.exception("Error scoring tweet {}".format(e), exc_info=True)
             return 0

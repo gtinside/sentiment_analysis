@@ -14,9 +14,10 @@ logger = logging.getLogger(__name__)
 
 class TwitterStreamProcessor:
     def __init__(self, consumer_key, consumer_key_secret, twitter_key, twitter_key_secret,
-                 redis_conn, symbols_list, sqs_client, sqs_queue_url, run_forever=True):
+                 redis_conn, symbols_list, sqs_client, sqs_queue_url, run_forever=True, use_stop_words=True,
+                 use_tokenizer=True):
         self._queue_processor = QueueProcessor(sqs_client, sqs_queue_url)
-        self._tweet_processor = TweetPostProcessor()
+        self._tweet_processor = TweetPostProcessor(use_stop_words, use_tokenizer)
         self._persist = AnalysisPersistence(redis_conn)
         self._consumer_key = consumer_key
         self._consumer_key_secret = consumer_key_secret
