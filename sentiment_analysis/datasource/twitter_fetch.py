@@ -29,7 +29,7 @@ class TwitterStreamProcessor:
 
     def get_tags(self):
         tags = []
-        logging.info("Reading the properties {} to build the tags".format(self._symbols_list))
+        logging.info("Reading the properties {} to build the tags now".format(self._symbols_list))
         with open(self._symbols_list) as log_file:
             for line in log_file:
                 tags.append(line.strip().split(","))
